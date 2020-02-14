@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FibonacciSequence", "FibonacciSequence\FibonacciSequence.csproj", "{1A61784C-331D-4F05-BF19-1ABE145677E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciTests", "FibonacciTests\FibonacciTests.csproj", "{8F0CA677-69E8-4F47-9FE4-5C715F51AD2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FibonacciTests", "FibonacciTests\FibonacciTests.csproj", "{8F0CA677-69E8-4F47-9FE4-5C715F51AD2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeNumbersSequence", "PrimeNumbersGenerator\PrimeNumbersSequence.csproj", "{70954363-F168-416B-9AFA-62EC38DCEDD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeTests", "PrimeTests\PrimeTests.csproj", "{E7250C9D-F17B-4C9B-8B7F-A936F663FD92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{8F0CA677-69E8-4F47-9FE4-5C715F51AD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F0CA677-69E8-4F47-9FE4-5C715F51AD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F0CA677-69E8-4F47-9FE4-5C715F51AD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70954363-F168-416B-9AFA-62EC38DCEDD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70954363-F168-416B-9AFA-62EC38DCEDD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70954363-F168-416B-9AFA-62EC38DCEDD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70954363-F168-416B-9AFA-62EC38DCEDD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7250C9D-F17B-4C9B-8B7F-A936F663FD92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7250C9D-F17B-4C9B-8B7F-A936F663FD92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7250C9D-F17B-4C9B-8B7F-A936F663FD92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7250C9D-F17B-4C9B-8B7F-A936F663FD92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
