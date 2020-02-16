@@ -9,6 +9,9 @@ namespace Generic_Queue
         private int x;
         private int y;
 
+        /// <summary>Initializes a new instance of the <see cref="Point"/> struct.</summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
         public Point(int x, int y)
         {
             this.x = x;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace FibonacciSequence
@@ -9,7 +11,7 @@ namespace FibonacciSequence
         /// <param name="n">The n.</param>
         /// <returns>Array of Fibonacci numbers.</returns>
         /// <exception cref="ArgumentException">n is less than 2.</exception>
-        public static BigInteger[] GetFibonacciArray(int n)
+        public static IEnumerable<BigInteger> GetFibonacciArray(int n)
         {
             if (n < 2)
             {

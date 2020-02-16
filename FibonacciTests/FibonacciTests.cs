@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using NUnit.Framework;
 using FibonacciSequence;
@@ -23,7 +25,7 @@ namespace FibonacciTests
         public void FibonacciTests_ResultTest()
         {
             BigInteger[] expected = new BigInteger[] {0,1,1,2,3,5,8};
-            BigInteger[] actual = FibonacciGenerator.GetFibonacciArray(7);
+            IEnumerable<BigInteger> actual = FibonacciGenerator.GetFibonacciArray(7);
             Assert.AreEqual(expected, actual);
         }
 
@@ -31,7 +33,7 @@ namespace FibonacciTests
         public void FibonacciTests_BiggerResultTest()
         {
             BigInteger[] expected = new BigInteger[] { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711  };
-            BigInteger[] actual = FibonacciGenerator.GetFibonacciArray(23);
+            IEnumerable<BigInteger> actual = FibonacciGenerator.GetFibonacciArray(23);
             Assert.AreEqual(expected, actual);
         }
 
@@ -48,7 +50,7 @@ namespace FibonacciTests
                 1304969544928657, 2111485077978050, 3416454622906707, 5527939700884757, 8944394323791464, 14472334024676221, 23416728348467685, 
                 37889062373143906, 61305790721611591, 99194853094755497, 160500643816367088, 259695496911122585, 420196140727489673, 679891637638612258, 
                 1100087778366101931, 1779979416004714189, 2880067194370816120, 4660046610375530309, 7540113804746346429, 12200160415121876738,};
-            BigInteger[] actual = FibonacciGenerator.GetFibonacciArray(94);
+            IEnumerable<BigInteger> actual = FibonacciGenerator.GetFibonacciArray(94);
             Assert.AreEqual(expected, actual);
         }
     }
