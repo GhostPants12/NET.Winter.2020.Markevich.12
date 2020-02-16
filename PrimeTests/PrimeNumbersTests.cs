@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace PrimeNumbersTests
@@ -26,7 +28,7 @@ namespace PrimeNumbersTests
                 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197,
                 199
             };
-            int[] actual = PrimeNumbers.PrimeNumbersGenerator.GetPrimeNumbers(46);
+            IEnumerable<int> actual = PrimeNumbers.PrimeNumbersGenerator.GetPrimeNumbers(46);
             Assert.AreEqual(expected, actual);
         }
 
@@ -50,7 +52,7 @@ namespace PrimeNumbersTests
                 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911,
                 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997,
             };
-            int[] actual = PrimeNumbers.PrimeNumbersGenerator.GetPrimeNumbers(168);
+            IEnumerable<int> actual = PrimeNumbers.PrimeNumbersGenerator.GetPrimeNumbers(168);
             Assert.AreEqual(expected, actual);
         }
     }

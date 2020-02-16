@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PrimeNumbers
 {
@@ -8,7 +10,7 @@ namespace PrimeNumbers
         /// <param name="n">The number of the prime numbers to be returned.</param>
         /// <exception cref="ArgumentException">Thrown when n is less or equal to zero.</exception>
         /// <returns>Returns array of prime numbers.</returns>
-        public static int[] GetPrimeNumbers(int n)
+        public static IEnumerable<int> GetPrimeNumbers(int n)
         {
             if (n <= 0)
             {
