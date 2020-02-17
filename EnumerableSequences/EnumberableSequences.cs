@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using GenericsDemo;
 
 namespace GenericsDemo
@@ -32,17 +33,21 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(predicate)} cannot be null.");
             }
 
-            var filteredSource = new List<TSource>();
+            var filteredSource = new TSource[source.Length()];
+            int i = 0;
 
             foreach (var item in source)
             {
                 if (predicate.IsMatch(item))
                 {
-                    filteredSource.Add(item);
+                    filteredSource[i] = item;
+                    i++;
                 }
             }
 
-            return filteredSource.ToArray();
+            Array.Resize(ref filteredSource, i);
+
+            return filteredSource;
         }
 
         /// <summary>Transforms source array into array of the specified type following specified rule.</summary>
@@ -72,14 +77,16 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(transformer)} cannot be null.");
             }
 
-            var filteredSource = new List<TResult>();
+            var filteredSource = new TResult[source.Length()];
+            int i = 0;
 
             foreach (var element in source)
             {
-                filteredSource.Add(transformer.Transform(element));
+                filteredSource[i] = transformer.Transform(element);
+                i++;
             }
 
-            return filteredSource.ToArray();
+            return filteredSource;
         }
 
         /// <summary>Orders the array according to some rule.</summary>
@@ -108,15 +115,9 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(comparer)} cannot be null.");
             }
 
-            int length = 0;
             TSource element;
 
-            foreach (var sourceElement in source)
-            {
-                length++;
-            }
-
-            var returnArray = new TSource[length];
+            var returnArray = new TSource[source.Length()];
             int i = 0;
 
             foreach (var sourceElement in source)
@@ -177,14 +178,8 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(source)} cannot be null.");
             }
 
-            int length = 0;
-            foreach (var element in source)
-            {
-                length++;
-            }
-
-            TSource[] returnArray = new TSource[length];
-            int i = length - 1;
+            TSource[] returnArray = new TSource[source.Length()];
+            int i = source.Length() - 1;
             foreach (var element in source)
             {
                 returnArray[i] = element;
@@ -192,6 +187,17 @@ namespace GenericsDemo
             }
 
             return returnArray;
+        }
+
+        public static int Length<TSource>(this IEnumerable<TSource> enumerable)
+        {
+            int length = 0;
+            foreach (var element in enumerable)
+            {
+                length++;
+            }
+
+            return length;
         }
     }
 }
