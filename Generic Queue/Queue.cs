@@ -39,12 +39,12 @@ namespace GenericQueue
 
         /// <summary> Gets the tail element from the queue.</summary>
         /// <returns>Returns the tail element from the queue.</returns>
-        /// <exception cref="System.NullReferenceException">The queue is empty.</exception>
+        /// <exception cref="System.ArgumentNullException">The queue is empty.</exception>
         public T Peek()
         {
             if (this.currentSize == 0)
             {
-                throw new NullReferenceException("The queue is empty.");
+                throw new ArgumentNullException($"{nameof(this.currentSize)} is zero.");
             }
 
             T returnValue = this.arr[0];
@@ -53,12 +53,12 @@ namespace GenericQueue
 
         /// <summary> Gets the tail element from the queue and removes it.</summary>
         /// <returns>Returns the tail element from the queue.</returns>
-        /// <exception cref="System.NullReferenceException">The queue is empty.</exception>
+        /// <exception cref="System.ArgumentNullException">The queue is empty.</exception>
         public T Dequeue()
         {
             if (this.currentSize == 0)
             {
-                throw new NullReferenceException("The queue is empty.");
+                throw new ArgumentNullException($"{nameof(this.currentSize)} is zero.");
             }
 
             T removed = this.Peek();
