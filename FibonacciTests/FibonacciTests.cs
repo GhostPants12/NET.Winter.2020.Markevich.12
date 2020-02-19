@@ -12,7 +12,7 @@ namespace FibonacciTests
         [Test]
         public void FibonacciTests_ValidationTest()
         {
-            Assert.Throws<ArgumentException>(() => FibonacciGenerator.GetFibonacciArray(1));
+            Assert.Throws<ArgumentException>(() => FibonacciGenerator.GetFibonacciArray(0));
         }
 
         [Test]

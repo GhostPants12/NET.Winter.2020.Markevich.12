@@ -33,21 +33,13 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(predicate)} cannot be null.");
             }
 
-            var filteredSource = new TSource[source.Length()];
-            int i = 0;
-
             foreach (var item in source)
             {
                 if (predicate.IsMatch(item))
                 {
-                    filteredSource[i] = item;
-                    i++;
+                    yield return item;
                 }
             }
-
-            Array.Resize(ref filteredSource, i);
-
-            return filteredSource;
         }
 
         /// <summary>Transforms source array into array of the specified type following specified rule.</summary>
@@ -77,16 +69,10 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(transformer)} cannot be null.");
             }
 
-            var filteredSource = new TResult[source.Length()];
-            int i = 0;
-
             foreach (var element in source)
             {
-                filteredSource[i] = transformer.Transform(element);
-                i++;
+                yield return transformer.Transform(element);
             }
-
-            return filteredSource;
         }
 
         /// <summary>Orders the array according to some rule.</summary>
@@ -154,16 +140,13 @@ namespace GenericsDemo
                 throw new ArgumentNullException($"{nameof(source)} cannot be null.");
             }
 
-            List<TSource> returnArray = new List<TSource>();
             foreach (var element in source)
             {
                 if (ReferenceEquals(element.GetType(), typeof(TSource)))
                 {
-                    returnArray.Add((TSource)element);
+                    yield return (TSource)element;
                 }
             }
-
-            return returnArray;
         }
 
         /// <summary>Reverses the specified source.</summary>

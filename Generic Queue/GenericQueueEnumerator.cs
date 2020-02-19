@@ -40,8 +40,14 @@ namespace GenericQueue
         /// </returns>
         public bool MoveNext()
         {
+            int version = queue.Version;
             if (this.position >= -1 && this.position < this.queue.CurrentSize - 1)
             {
+                if (queue.Version != version)
+                {
+                    throw new 
+                }
+
                 this.position++;
                 return true;
             }

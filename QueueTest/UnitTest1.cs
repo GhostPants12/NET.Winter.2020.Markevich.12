@@ -17,9 +17,11 @@ namespace QueueTest
             intQueue.Enqueue(4);
             Assert.AreEqual(1, intQueue.Peek());
             Assert.AreEqual(1, intQueue.Dequeue());
+            intQueue.Enqueue(5);
             Assert.AreEqual(2, intQueue.Dequeue());
             Assert.AreEqual(3, intQueue.Dequeue());
             Assert.AreEqual(4, intQueue.Dequeue());
+            Assert.AreEqual(5, intQueue.Dequeue());
         }
 
         [Test]

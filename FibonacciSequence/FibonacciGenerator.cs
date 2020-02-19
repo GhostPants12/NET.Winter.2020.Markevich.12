@@ -18,15 +18,20 @@ namespace FibonacciSequence
                 throw new ArgumentException($"{nameof(n)} cannot be less than 2");
             }
 
-            BigInteger[] returnArray = new BigInteger[n];
-            returnArray[0] = 0;
-            returnArray[1] = 1;
-            for (int i = 2; i < n; i++)
-            {
-                returnArray[i] = returnArray[i - 2] + returnArray[i - 1];
-            }
+            return GetArray();
 
-            return returnArray;
+            IEnumerable<BigInteger> GetArray()
+            {
+                BigInteger previousNum, num;
+                yield return previousNum = 0;
+                yield return num = 1;
+                for (int i = 2; i < n; i++)
+                {
+                    var buf = previousNum;
+                    previousNum = num;
+                    yield return num = buf + previousNum;
+                }
+            }
         }
     }
 }
