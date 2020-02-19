@@ -40,12 +40,12 @@ namespace GenericQueue
         /// </returns>
         public bool MoveNext()
         {
-            int version = queue.Version;
+            int version = this.queue.Version;
             if (this.position >= -1 && this.position < this.queue.CurrentSize - 1)
             {
-                if (queue.Version != version)
+                if (this.queue.Version != version)
                 {
-                    throw new 
+                    throw new ArgumentException("Queue was updated.");
                 }
 
                 this.position++;
