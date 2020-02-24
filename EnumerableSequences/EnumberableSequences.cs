@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -16,23 +17,7 @@ namespace GenericsDemo
         /// <returns>Filtered array.</returns>
         public static IEnumerable<TSource> FilterBy<TSource>(this IEnumerable<TSource> source, IPredicate<TSource> predicate)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException($"{nameof(source)} cannot be null.");
-            }
-
-            if (source.GetEnumerator().MoveNext() == false)
-            {
-                throw new ArgumentException($"{nameof(source)} cannot be empty.");
-            }
-
-            source.GetEnumerator().Reset();
-
-            if (predicate is null)
-            {
-                throw new ArgumentNullException($"{nameof(predicate)} cannot be null.");
-            }
-
+            CheckParams(source, predicate);
             foreach (var item in source)
             {
                 if (predicate.IsMatch(item))
@@ -52,23 +37,7 @@ namespace GenericsDemo
         /// <exception cref="ArgumentException">Source array is empty.</exception>
         public static IEnumerable<TResult> Transform<TSource, TResult>(this IEnumerable<TSource> source, ITransformer<TSource, TResult> transformer)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException($"{nameof(source)} cannot be null.");
-            }
-
-            if (source.GetEnumerator().MoveNext() == false)
-            {
-                throw new ArgumentException($"{nameof(source)} cannot be empty.");
-            }
-
-            source.GetEnumerator().Reset();
-
-            if (transformer is null)
-            {
-                throw new ArgumentNullException($"{nameof(transformer)} cannot be null.");
-            }
-
+            CheckParams(source, transformer);
             foreach (var element in source)
             {
                 yield return transformer.Transform(element);
@@ -81,26 +50,9 @@ namespace GenericsDemo
         /// <param name="comparer">The comparing rule.</param>
         /// <returns>Transformed array.</returns>
         /// <exception cref="ArgumentNullException">Source array is null or comparing rule is null.</exception>
-        /// <exception cref="ArgumentException">Source array is empty.</exception>
         public static IEnumerable<TSource> OrderAccordingTo<TSource>(this IEnumerable<TSource> source, IComparer<TSource> comparer)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException($"{nameof(source)} cannot be null.");
-            }
-
-            if (source.GetEnumerator().MoveNext() == false)
-            {
-                throw new ArgumentException($"{nameof(source)} cannot be empty.");
-            }
-
-            source.GetEnumerator().Reset();
-
-            if (comparer is null)
-            {
-                throw new ArgumentNullException($"{nameof(comparer)} cannot be null.");
-            }
-
+            CheckParams(source, comparer);
             TSource element;
 
             var returnArray = new TSource[source.Length()];
@@ -125,7 +77,10 @@ namespace GenericsDemo
                 }
             }
 
-            return returnArray;
+            foreach (var sourceElement in returnArray)
+            {
+                yield return sourceElement;
+            }
         }
 
         /// <summary>  Returns source array's elements of the specified type.</summary>
@@ -133,16 +88,12 @@ namespace GenericsDemo
         /// <param name="source">The source.</param>
         /// <returns>Returns the array of specified type.</returns>
         /// <exception cref="ArgumentNullException">Source is null.</exception>
-        public static IEnumerable<TSource> TypeOf<TSource>(this IEnumerable<object> source)
+        public static IEnumerable<TSource> TypeOf<TSource>(this IEnumerable source)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException($"{nameof(source)} cannot be null.");
-            }
-
+            CheckParams(source);
             foreach (var element in source)
             {
-                if (ReferenceEquals(element.GetType(), typeof(TSource)))
+                if (element is TSource)
                 {
                     yield return (TSource)element;
                 }
@@ -156,10 +107,7 @@ namespace GenericsDemo
         /// <exception cref="ArgumentNullException">Source array is null.</exception>
         public static IEnumerable<TSource> Reverse<TSource>(this IEnumerable<TSource> source)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException($"{nameof(source)} cannot be null.");
-            }
+            CheckParams(source);
 
             TSource[] returnArray = new TSource[source.Length()];
             int i = source.Length() - 1;
@@ -169,7 +117,10 @@ namespace GenericsDemo
                 i--;
             }
 
-            return returnArray;
+            foreach (var element in returnArray)
+            {
+                yield return element;
+            }
         }
 
         public static int Length<TSource>(this IEnumerable<TSource> enumerable)
@@ -181,6 +132,23 @@ namespace GenericsDemo
             }
 
             return length;
+        }
+
+        /// <summary>Checks the parameters.</summary>
+        /// <param name="source">The source.</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        private static void CheckParams(object source)
+        {
+            source = source ?? throw new ArgumentNullException($"{nameof(source)} cannot be null.");
+        }
+
+        /// <summary>Checks the parameters.</summary>
+        /// <param name="source">The source.</param>
+        /// <exception cref="ArgumentNullException">source is null or param is null.</exception>
+        private static void CheckParams(object source, object param)
+        {
+            CheckParams(source);
+            param = param ?? throw new ArgumentNullException($"{nameof(param)} cannot be null.");
         }
     }
 }
